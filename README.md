@@ -1,7 +1,5 @@
 # TheFridge
+Group Members (ADD YOUR LOVELY NAME HERE):
 
-Group Members:
-1.
-2.
-3. Paul
-4. Andrew C
+,,,Andrew C,Paul
+
