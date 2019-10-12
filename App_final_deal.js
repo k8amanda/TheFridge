@@ -315,7 +315,7 @@ class AddScreen extends Component {
             <Text>Food Item</Text>
             <TextInput style={styles.formInput} placeholder="i.e. milk, bread, etc." onChangeText={(text) => this.setState({food:text})} />
             <Text>Exp. Date</Text>
-            <TextInput style={styles.formInput} placeholder="MM/DD/YY" onChangeText={(text) => this.setState({expdate:text})} />
+            <TextInput style={styles.formInput} placeholder="MM-DD-YYYY" onChangeText={(text) => this.setState({expdate:text})} />
             <Button onPress={this.updateFridge} title="Add to Fridge" color="#ea7794" />
           </View>
 
