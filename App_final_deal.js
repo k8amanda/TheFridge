@@ -377,12 +377,29 @@ class AddScreen extends Component {
   }
 
   updateFridge = () => {
-    this.setState({
-      size: this.state.size + 1
-    });
-    this.state.names.push(this.state.food);
-    this.state.dates.push(this.state.expdate);
-    this.setState({ state: this.state });
+    var del_req = new Request("http://130.64.96.226:4000/add_var", {
+
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      //make sure to serialize your JSON body
+      body: JSON.stringify({
+        "name": this.state.food, 
+        "exp_date": this.state.expdate
+      })
+    })
+    fetch(del_req)
+      .then((res) => {
+  //          this.setState({ state: this.state });
+        })
+     
+      .catch(err => {
+        Alert.alert("Error")
+        console.log("ERROR")
+        console.log(err)
+      });
+
     this.forceUpdate();
   }
 
