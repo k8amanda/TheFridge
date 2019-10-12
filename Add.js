@@ -2,6 +2,27 @@ import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 export default class ButtonBasics extends Component {
+  constructor() {
+    super();
+    this.state = {
+      size: 5,
+      names: ["apples", "oranges", "peaches", "pears", "cheese"],
+      dates: ["11/11/11", "11/11/12", "11/11/13", "11/11/14", "11/11/15"],
+    };
+  }
+  
+  renderList = () => {
+    let table = [];
+    for (let i = 0; i < this.state.size; i++) {
+      table.push(
+        <View>
+          <Text>{this.state.names[i]}     {this.state.dates[i]}</Text>
+        </View>
+      )
+    }
+    return table;
+  };
+  
   _onPressButton() {
     fetch("http://localhost:4000/");
     Alert.alert('You tapped the button!');
@@ -16,7 +37,9 @@ export default class ButtonBasics extends Component {
     return (
       <View style={styles.total}>
         <View style={styles.header}>
-          <Image style={styles.images} source={require('./Fridge-condensed-white.png')} />
+          <TouchableOpacity onPress={this._onPressButton}>
+            <Image style={styles.images} onPress={this._onPressButton} source={require('./Fridge-condensed-white.png')} />
+          </TouchableOpacity>
           <View style={styles.leftHold} />
           <Image style={{width: 145, resizeMode: 'contain'}} source={require('./Add-title.png')} />
           <View style={styles.rightHold} />
@@ -24,23 +47,17 @@ export default class ButtonBasics extends Component {
         
         <View style={styles.buttonContainerTemp}>
          <View style={styles.form}>
-            <Button onPress={this._onPressButton} title="Press Me" />
-            <Button onPress={this._onPressButton2} title="Press Me" color="#ff728c" />
-
-            <View style={styles.alternativeLayoutButtonContainer}>
-              <Button onPress={this._onPressButton} title="This looks great!" />
-              <Button onPress={this._onPressButton} title="OK!" color="#841584" />
-            </View>
-
             <Text>Food Item</Text>
             <TextInput style={styles.formInput} placeholder="i.e. milk, bread, etc." />
             <Text>Exp. Date</Text>
             <TextInput style={styles.formInput} placeholder="MM/DD/YY" />
-
+            <Button title="Add to Fridge" color="#ea7794" />
           </View>
+
           <View style={styles.foodList}>
           <ScrollView>
             <Text>Scrolling list of food</Text>
+            {this.renderList()}
           </ScrollView>
           </View>
         </View>
@@ -95,11 +112,11 @@ const styles = StyleSheet.create({
     //margin: 20,
     justifyContent: 'space-evenly',
   },
-  alternativeLayoutButtonContainer: {
-    //margin: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+  // alternativeLayoutButtonContainer: {
+  //   //margin: 20,
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  // },
   images:{
     //flexDirection: 'row',
     //justifyContent: 'flex-start',
@@ -124,8 +141,8 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   foodList: {
-    flex:1,
+    backgroundColor: '#D0F2E4',
+    flex: 1,
     flexDirection: 'row',
   }
 });
-
