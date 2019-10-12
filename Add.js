@@ -5,9 +5,11 @@ export default class ButtonBasics extends Component {
   constructor() {
     super();
     this.state = {
-      size: 5,
-      names: ["apples", "oranges", "peaches", "pears", "cheese"],
-      dates: ["11/11/11", "11/11/12", "11/11/13", "11/11/14", "11/11/15"],
+      food: '',
+      expdate: '',
+      size: 0,
+      names: [],
+      dates: [],
     };
   }
   
@@ -24,13 +26,21 @@ export default class ButtonBasics extends Component {
   };
   
   _onPressButton() {
-    fetch("http://localhost:4000/");
     Alert.alert('You tapped the button!');
-    Alert.alert(res);
   }
 
   _onPressButton2() {
     Alert.alert('hiya buddy!');
+  }
+
+  updateFridge = () => {
+    this.setState({
+      size: this.state.size + 1
+    });
+    this.state.names.push(this.state.food);
+    this.state.dates.push(this.state.expdate);
+    this.setState({ state: this.state });
+    this.forceUpdate();
   }
 
   render() {
@@ -48,15 +58,15 @@ export default class ButtonBasics extends Component {
         <View style={styles.buttonContainerTemp}>
          <View style={styles.form}>
             <Text>Food Item</Text>
-            <TextInput style={styles.formInput} placeholder="i.e. milk, bread, etc." />
+            <TextInput style={styles.formInput} placeholder="i.e. milk, bread, etc." onChangeText={(text) => this.setState({food:text})} />
             <Text>Exp. Date</Text>
-            <TextInput style={styles.formInput} placeholder="MM/DD/YY" />
-            <Button title="Add to Fridge" color="#ea7794" />
+            <TextInput style={styles.formInput} placeholder="MM/DD/YY" onChangeText={(text) => this.setState({expdate:text})} />
+            <Button onPress={this.updateFridge} title="Add to Fridge" color="#ea7794" />
           </View>
 
           <View style={styles.foodList}>
           <ScrollView>
-            <Text>Scrolling list of food</Text>
+            <Text>What's in my Fridge?</Text>
             {this.renderList()}
           </ScrollView>
           </View>
@@ -64,15 +74,11 @@ export default class ButtonBasics extends Component {
         
         
         <View style={styles.footer}>
-          <TouchableOpacity onPress={this._onPressButton}>
-            <Image style={styles.images} onPress={this._onPressButton} source={require('./Add-button.png')} />
-          </TouchableOpacity>
+          <Image style={styles.images} onPress={this._onPressButton} source={require('./Add-button.png')} />
           <TouchableOpacity onPress={this._onPressButton2}>
             <Image style={styles.images} source={require('./The_Fridge-icon.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={this._onPressButton}>
-            <Image style={styles.images} source={require('./Compost-button.png')} />
-          </TouchableOpacity>
+          <Image style={styles.images} source={require('./Compost-button.png')} />
         </View>
       </View>
     );
@@ -146,3 +152,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   }
 });
+
