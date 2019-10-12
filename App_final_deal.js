@@ -11,19 +11,22 @@ class HomePage extends Component {
   render() {
     return (
 
-      <View style={styles.headerAsdf}>
-        <Image 
-        source={require('./Fridge-extended-white.png')} style={styles.image}
-        />
 
+      <View style={styles.homestyle}>
+      
+        
         <View style={styles.buttonContainer}>
-          
+          <TouchableOpacity disabled= {true}>
+              <Image style={{width: 300, height: 80, resizeMode: 'contain'}} source={require('./Fridge-extended-white.png')} />
+          </TouchableOpacity>
+          <Text style={styles.upHold}></Text>
+
             <Button onPress={() => this.props.navigation.navigate('Fridge')} title="OPEN YOUR FRIDGE" color="#ea7794" />
-            
+        
         </View>
-        <View style={{flex:1, backgroundColor: '#3df2a7'}} />
         
       </View>
+
     );
   }
 }
@@ -117,6 +120,9 @@ class FridgeScreen extends Component {
   }
 }
 const styles = StyleSheet.create({
+  upHold:{
+    height: 80,
+  },
   list:{
     fontSize: 40,
     fontWeight: 'bold',
@@ -141,6 +147,12 @@ const styles = StyleSheet.create({
   header:{
     flex: 1,
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    backgroundColor: '#3df2a7',
+  },
+  homestyle:{
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'space-evenly',
     backgroundColor: '#3df2a7',
@@ -213,31 +225,32 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  headerAsdf:{
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    backgroundColor: '#ffffff',
-  },
+  // headerAsdf:{
+  //   flex: 1,
+  //   flexDirection: 'column',
+  //   justifyContent: 'center',
+  //   alignItems: 'stretch',
+  //   backgroundColor: '#ffffff',
+  // },
   buttonContainer: {
     flex:5,
-    margin: 20,
-    justifyContent: 'space-evenly',
+    //padding: 80,
+    //margin: 20,
+    justifyContent: 'center',
   },
   // alternativeLayoutButtonContainer: {
   //   margin: 20,
   //   flexDirection: 'row',
   //   justifyContent: 'space-between',
   // },
-  image: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: 'contain',
-    backgroundColor: '#3df2a7'
+  // image: {
+  //   flex: 1,
+  //   width: null,
+  //   height: null,
+  //   resizeMode: 'contain',
+  //   backgroundColor: '#3df2a7'
 
-  },
+  // },
 });
 
 class AddScreen extends Component {
