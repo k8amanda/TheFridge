@@ -321,7 +321,7 @@ class AddScreen extends Component {
 
           <View style={styles.foodList}>
           <ScrollView>
-            <Text>Whats in my Fridge?</Text>
+            <Text>What's in my Fridge?</Text>
             {this.renderList()}
           </ScrollView>
           </View>
