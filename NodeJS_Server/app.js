@@ -10,12 +10,15 @@ var app = express();
 app.set('port', process.env.PORT || 4000);
 
 app.get('/', function (req, res, next) {
+	console.log("Queried:");
     client.query('SELECT * FROM fridge where name = $1', ['Kates Fridge'], function (err, result) {
         if (err) {
             console.log(err);
             res.status(400).send(err);
         }
-        res.status(200).send(result.rows);
+        var query_result = result.rows[0];
+        res.status(200).send(query_result);
+        console.log(query_result);
     });
 });
 
