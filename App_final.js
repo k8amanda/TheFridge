@@ -1,34 +1,38 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-/*import * as React from 'react';*/
-/*import { Button, View, Text } from 'react-native';*/
 import React, {Component} from 'react';
 import { Alert, Button, StyleSheet, View, Text, TextInput, Image, TouchableOpacity, ScrollView, TouchableHighlight, RefreshControl } from 'react-native';
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-class HomeScreen extends React.Component {
+class HomePage extends Component {
+  static navigationOptions = {
+    header: null
+  }
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="The Fridge"
-          onPress={() => this.props.navigation.navigate('Fridge')}
+
+      <View style={styles.headerAsdf}>
+        <Image 
+        source={require('./Fridge-extended-white.png')} style={styles.image}
         />
+
+        <View style={{backgroundColor: '#ff8899'}}/>
+        <View style={styles.buttonContainer}>
+          
+            <Button onPress={() => this.props.navigation.navigate('Fridge')} title="FRIDGE" color="#841584" />
+            
+        </View>
+        <View style={{flex:1, backgroundColor: '#3df2a7'}} />
+        
       </View>
     );
   }
 }
 
 class FridgeScreen extends Component {
-
+  static navigationOptions = {
+    header: null
+  }
   constructor() {
     super();
     this.state = {
@@ -36,8 +40,9 @@ class FridgeScreen extends Component {
       names: [1,2,3,4,5, 6, 7, 8],
       dates: ["11/11/11", "11/11/12", "11/11/13", "11/11/14", "11/11/15", "11/11/16", "11/11/17", "11/11/18"],
       disabled: true,
-      color: "#ffffff",
+      backcolor: "#ffffff",
       header: "Items List",
+      color: "#000000",
    };
   }
   renderList = () =>{
@@ -47,8 +52,8 @@ class FridgeScreen extends Component {
         table.push(
           <View style={styles.ListContainer}>
               <View style={styles.listL}>
-                <TouchableHighlight style={{backgroundColor: this.state.color,}} disabled={this.state.disabled} onPress={this.deleteItem}>
-                  <Text style={styles.list}>{this.state.names[i]}</Text>
+                <TouchableHighlight style={{backgroundColor: this.state.backcolor, borderRadius: 20, borderWidth: 2, borderColor: '#2c9b75'}} disabled={this.state.disabled} onPress={this.deleteItem}>
+                  <Text style={{fontSize: 40,fontWeight: 'bold',textAlign: 'center',color: this.state.color}}>{this.state.names[i]}</Text>
                 </TouchableHighlight>
               </View>
               <View style={styles.listR}>
@@ -92,13 +97,16 @@ class FridgeScreen extends Component {
   }
   deleteMode(){
     if (this.state.disabled){
-      this.state.color = "#cc0000";
-      this.state.header = "Select Item to Delete\nSelect Trashcan to leave"
+      this.setState({ backcolor: "#ea7794"});
+      this.setState({header: "Select Item to Delete\nSelect Trashcan to leave"});
+      this.setState({color: "#ffffff"});
     }else{
-      this.state.color = "#ffffff";
-      this.state.header = "Items List";
+      this.setState({backcolor: "#ffffff"});
+      this.setState({header: "Items List"});
+      this.setState({color: "#000000"});
+
     }
-    this.state.disabled = !(this.state.disabled);
+    this.setState({disabled: !(this.state.disabled)});
     this.setState({ state: this.state });
     this.forceUpdate();
   }
@@ -126,10 +134,10 @@ const styles = StyleSheet.create({
   leftHoldF:{
     width: 20,
   },
-  rightHoldF:{
-    flex: 1,
-    width: 200,
-  },
+  // rightHoldF:{
+  //   flex: 1,
+  //   width: 200,
+  // },
 
   header:{
     flex: 1,
@@ -140,8 +148,9 @@ const styles = StyleSheet.create({
   },
   footer:{
     flex: 1,
+    padding: 5,
     flexDirection: 'row',
-    alignItems: 'stretch',
+    alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: '#3df2a7',
   },
@@ -159,13 +168,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'stretch',
   },
-  footer:{
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#3df2a7',
-  },
+  // footer:{
+  //   flex: 1,
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-around',
+  //   alignItems: 'center',
+  //   backgroundColor: '#3df2a7',
+  // },
   formInput: {
     borderWidth: 1,
     borderRadius: 20,
@@ -184,18 +193,18 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: 100,
   },
-  leftHold: {
-    width: 50,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  rightHold: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
+  // leftHold: {
+  //   width: 50,
+  //   flexDirection: 'row',
+  //   justifyContent: 'flex-end',
+  //   alignItems: 'center',
+  // },
+  // rightHold: {
+  //   flex: 1,
+  //   flexDirection: 'row',
+  //   justifyContent: 'flex-end',
+  //   alignItems: 'center',
+  // },
   form: {
     flex: 1,
     margin: 20,
@@ -204,41 +213,38 @@ const styles = StyleSheet.create({
     backgroundColor: '#D0F2E4',
     flex: 1,
     flexDirection: 'row',
-  }
+  },
+  headerAsdf:{
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    backgroundColor: '#ffffff',
+  },
+  buttonContainer: {
+    flex:5,
+    margin: 20,
+    justifyContent: 'space-evenly',
+  },
+  alternativeLayoutButtonContainer: {
+    margin: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'contain',
+    backgroundColor: '#3df2a7'
 
+  },
 });
-/*
-class DetailsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Detail Screen'
-  }
 
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.push('Details')}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-        <Button
-          title="Go to Add Screen"
-          onPress={() => this.props.navigation.navigate('ButtonBasics')}
-        />
-      </View>
-    );
-  }
-}
-*/
 class AddScreen extends Component {
+  static navigationOptions = {
+    header: null
+  }
   constructor() {
     super();
     this.state = {
@@ -287,9 +293,9 @@ class AddScreen extends Component {
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
             <Image style={styles.images}  source={require('./Fridge-condensed-white.png')} />
           </TouchableOpacity>
-          <View style={styles.leftHold} />
-          <Image style={{width: 145, resizeMode: 'contain'}} source={require('./Add-title.png')} />
-          <View style={styles.rightHold} />
+           <View style={styles.leftHoldF} />
+          <Image style={{width: 115, resizeMode: 'contain'}} source={require('./Add-title.png')} />
+          <View style={styles.rightHoldf} />
         </View>
         
         <View style={styles.buttonContainerTemp}>
@@ -322,78 +328,11 @@ class AddScreen extends Component {
   }
 }
 
-/*const styles = StyleSheet.create({
-  total:{
-    flex: 1,
-    flexDirection: 'column',
-    //justifyContent: 'center',
-    alignItems: 'stretch',
-  },
-  header:{
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    backgroundColor: '#3df2a7',
-  },
-  footer:{
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#3df2a7',
-  },
-  formInput: {
-    borderWidth: 1,
-    borderRadius: 20,
-    margin: 10,
-    padding: 5,
-  },
-  buttonContainerTemp: {
-    flex:5,
-    flexDirection: 'row',
-    //margin: 20,
-    justifyContent: 'space-evenly',
-  },
-  // alternativeLayoutButtonContainer: {
-  //   //margin: 20,
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  // },
-  images:{
-    height: 80,
-    resizeMode: 'contain',
-    width: 100,
-  },
-  leftHold: {
-    width: 50,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  rightHold: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  form: {
-    flex: 1,
-    margin: 20,
-  },
-  foodList: {
-    backgroundColor: '#D0F2E4',
-    flex: 1,
-    flexDirection: 'row',
-  }
-});
-*/
 const RootStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: HomePage,
   /*Details: DetailsScreen,*/
   Add: AddScreen, 
   Fridge: FridgeScreen,
 });
 
 export default createAppContainer(RootStack);
-
