@@ -16,10 +16,9 @@ class HomePage extends Component {
         source={require('./Fridge-extended-white.png')} style={styles.image}
         />
 
-        <View style={{backgroundColor: '#ff8899'}}/>
         <View style={styles.buttonContainer}>
           
-            <Button onPress={() => this.props.navigation.navigate('Fridge')} title="FRIDGE" color="#841584" />
+            <Button onPress={() => this.props.navigation.navigate('Fridge')} title="OPEN YOUR FRIDGE" color="#ea7794" />
             
         </View>
         <View style={{flex:1, backgroundColor: '#3df2a7'}} />
@@ -226,11 +225,11 @@ const styles = StyleSheet.create({
     margin: 20,
     justifyContent: 'space-evenly',
   },
-  alternativeLayoutButtonContainer: {
-    margin: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+  // alternativeLayoutButtonContainer: {
+  //   margin: 20,
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  // },
   image: {
     flex: 1,
     width: null,
