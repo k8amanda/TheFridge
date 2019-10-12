@@ -38,9 +38,9 @@ class FridgeScreen extends Component {
   constructor() {
     super();
     this.state = {
-      size: 8,
-      names: [1,2,3,4,5, 6, 7, 8],
-      dates: ["11/11/11", "11/11/12", "11/11/13", "11/11/14", "11/11/15", "11/11/16", "11/11/17", "11/11/18"],
+      size: 0,
+      names: [],
+      dates: [],
       disabled: true,
       backcolor: "#ffffff",
       header: "Items List",
@@ -49,6 +49,34 @@ class FridgeScreen extends Component {
   }
   renderList = () =>{
     let table = [];
+
+    let query_output;
+    let food_names = [];
+    let food_expdates = [];
+    fetch("http://130.64.96.226:4000/select_food_name_expdate")
+      .then((res) => {
+        res.json() 
+        .then((json) => {
+          query_output = json
+
+          for (var i in query_output) {
+            //Pretty Printing
+            this_output = query_output[i]
+            food_names.push(this_output[0]);
+            food_expdates.push(this_output[1].slice(5,10) + "-" + this_output[1].slice(0,4));
+          }
+
+          this.state.names = food_names;
+          this.state.dates = food_expdates;
+          this.setState({ state: this.state });
+        })
+      })
+     
+      .catch(err => {
+        Alert.alert("Error")
+        console.log("ERROR")
+        console.log(err)
+      });
 
     for (let i = 0; i < this.state.size; i++) {
         table.push(
