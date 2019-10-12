@@ -82,7 +82,7 @@ app.use(express.json());
 
 // Access the parse results as request.body
 app.post('/select_var', function(request, response){
-    console.log(request);
+    console.log(request.body);
     console.log(request.body);
 });
 
