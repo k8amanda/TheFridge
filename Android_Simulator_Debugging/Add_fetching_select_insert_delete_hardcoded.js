@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
 
+/*Hard-coded selection*/
 export default class ButtonBasics extends Component {
   _onPressButton() {
-    fetch("http://130.64.96.226:4000"/*?param1=value1&param2=value2"*/)
+    let name_to_select = 'Kates Fridge';
+    fetch("http://130.64.96.226:4000*?param1=" + name_to_select)
 //      .then(response => Alert.alert("Responded"))
 //      .then(response => {
 //        Alert.alert(JSON.stringify(response))
@@ -26,6 +28,7 @@ export default class ButtonBasics extends Component {
     //Alert.alert('You tapped the button!');
   }
 
+/*Hard-coded deletion*/
   _onPressButton2() {
     fetch("http://130.64.96.226:4000/delete"/*?param1=value1&param2=value2"*/)
 //      .then(response => Alert.alert("Responded"))
