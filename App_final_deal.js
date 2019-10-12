@@ -78,11 +78,11 @@ class FridgeScreen extends Component {
         console.log(err)
       });
 
-    for (let i = 0; i < this.state.size; i++) {
+    for (let i = 0; i < this.state.names.length; i++) {
         table.push(
           <View style={styles.ListContainer}>
               <View style={styles.listL}>
-                <TouchableHighlight style={{backgroundColor: this.state.backcolor, borderRadius: 20, borderWidth: 2, borderColor: '#2c9b75'}} disabled={this.state.disabled} onPress={this.deleteItem}>
+                <TouchableHighlight style={{backgroundColor: this.state.backcolor, borderRadius: 20, borderWidth: 2, borderColor: '#2c9b75'}} disabled={this.state.disabled} onPress={() => this.deleteItem(thisname)}>
                   <Text style={{fontSize: 40,fontWeight: 'bold',textAlign: 'center',color: this.state.color}}>{this.state.names[i]}</Text>
                 </TouchableHighlight>
               </View>
@@ -140,9 +140,33 @@ class FridgeScreen extends Component {
     this.setState({ state: this.state });
     this.forceUpdate();
   }
-  deleteItem(){
 
+  deleteItem(food_name){
+    console.log("getting to delete");
+    var del_req = new Request("http://130.64.96.226:4000/delete_var", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      //make sure to serialize your JSON body
+      body: JSON.stringify({
+        "name": food_name
+      })
+    })
+    fetch(del_req)
+      .then((res) => {
+//          this.setState({ state: this.state });
+        })
+     
+      .catch(err => {
+        Alert.alert("Error")
+        console.log("ERROR")
+        console.log(err)
+      });
+    console.log(food_name);
+    this.forceUpdate();
   }
+
   handlePress = () => {
       Alert.alert("Hello!!!");
   }
@@ -298,7 +322,7 @@ class AddScreen extends Component {
   
   renderList = () => {
     let table = [];
-    for (let i = 0; i < this.state.size; i++) {
+    for (let i = 0; i < this.state.names.length; i++) {
       table.push(
         <View>
           <Text>{this.state.names[i]}     {this.state.dates[i]}</Text>
