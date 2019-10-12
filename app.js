@@ -76,7 +76,7 @@ app.post('/select_var', function (req, res, next) {
     });
 });
 
-/*Selecting a VARIABLE name from the fridge table*/
+/*Deleting a VARIABLE name from the fridge table*/
 app.post('/delete_var', function (req, res, next) {
 	console.log("Deleting:");
 	console.log(req.body.name)
@@ -159,8 +159,8 @@ app.get('/select_all_fridges', function (req, res, next) {
 /*Selecting Food_names and expiration_dates from the fridge table*/
 app.get('/select_food_name_expdate', function (req, res, next) {
 //	console.log("Selecting all fridges:");
-//	console.log(req.body.name); //NO PARAMETERS PASSED IN (until sorting)
-	client.query('SELECT * FROM Food_Items', function (err, result) {
+//	console.log(req.body.name); //NO PARAMETERS PASSED IN (until sorting, default is by name)
+	client.query('SELECT * FROM Food_Items order by name', function (err, result) {
         if (err) {
             console.log(err);
             res.status(400).send(err);
