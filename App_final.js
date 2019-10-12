@@ -48,7 +48,7 @@ class FridgeScreen extends Component {
         table.push(
           <View style={styles.ListContainer}>
               <View style={styles.listL}>
-                <TouchableHighlight style={{backgroundColor: this.state.backcolor, borderRadius: 20, margin: 10, padding: 5,}} disabled={this.state.disabled} onPress={this.deleteItem}>
+                <TouchableHighlight style={{backgroundColor: this.state.backcolor, borderRadius: 20, borderWidth: 2, borderColor: '#2c9b75'}} disabled={this.state.disabled} onPress={this.deleteItem}>
                   <Text style={{fontSize: 40,fontWeight: 'bold',textAlign: 'center',color: this.state.color}}>{this.state.names[i]}</Text>
                 </TouchableHighlight>
               </View>
