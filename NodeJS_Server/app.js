@@ -31,6 +31,20 @@ app.get('/add', function (req, res, next) {
             console.log(err);
             res.status(400).send(err);
         }
+/*        var query_result = result.rows[0];
+        res.status(200).send(query_result);
+        console.log(query_result);*/
+    });
+});
+
+/*Insert an entity into the fridge table*/
+app.get('/delete', function (req, res, next) {
+	console.log("Deleted:");
+    client.query('delete from fridge where name = $1', ['James Fridge'], function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(400).send(err);
+        }
         var query_result = result.rows[0];
         res.status(200).send(query_result);
         console.log(query_result);
