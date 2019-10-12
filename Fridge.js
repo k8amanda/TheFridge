@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { Alert, TouchableOpacity, Image, Text, View, StyleSheet, TextInput } from 'react-native';
-import { Button } from 'react-native';
+import {Alert, TouchableOpacity, Image, Text, View, StyleSheet, TextInput, ScrollView, RefreshControl} from 'react-native';
+import { Button, TouchableHighlight } from 'react-native';
+
 
 export default class Fridge extends Component {
+
   constructor() {
     super();
     this.state = {
-      size: 5,
-      names: [1,2,3,4,5],
-      dates: ["11/11/11", "11/11/12", "11/11/13", "11/11/14", "11/11/15"],
+      size: 8,
+      names: [1,2,3,4,5, 6, 7, 8],
+      dates: ["11/11/11", "11/11/12", "11/11/13", "11/11/14", "11/11/15", "11/11/16", "11/11/17", "11/11/18"],
+      disabled: true,
+      color: "#ffffff",
+      header: "Items List",
    };
   }
   renderList = () =>{
@@ -16,10 +21,15 @@ export default class Fridge extends Component {
 
     for (let i = 0; i < this.state.size; i++) {
         table.push(
-          <View key={i} style={styles.todoItem}>
-
-            <TextInput style={{ flex: 1 }} />
-              <Text style={styles.list}>√{this.state.names[i]}     {this.state.dates[i]}</Text>
+          <View style={styles.ListContainer}>
+              <View style={styles.listL}>
+                <TouchableHighlight style={{backgroundColor: this.state.color,}} disabled={this.state.disabled} onPress={this.deleteItem}>
+                  <Text style={styles.list}>{this.state.names[i]}</Text>
+                </TouchableHighlight>
+              </View>
+              <View style={styles.listR}>
+                <Text style={styles.list}>{this.state.dates[i]}</Text>
+              </View>
           </View>
         );
       }
@@ -33,13 +43,15 @@ export default class Fridge extends Component {
             <Image style={styles.imagef1} source={require('./Fridge-condensed-white.png')} />
           </TouchableOpacity>
            <View style={styles.leftHold} />
-
-          <Image style={styles.imagef2} source={require('./Fridge-extended.png')} />
+          <Image style={{width: 200, resizeMode: 'contain'}} source={require('./Fridge-extended.png')} />
           <View style={styles.rightHold} />
         </View>
-        <View style={styles.buttonContainer}>
-          <Text>Hello, world!</Text>
-          {this.renderList()}
+
+        <View style={styles.ListContainer}>
+          <ScrollView>
+              <Text style={{textAlign: 'center', fontSize: 30, backgroundColor: '#ffffff',}}>{this.state.header} </Text>
+            {this.renderList()}
+          </ScrollView>
         </View>
         <View style={styles.footer}>
           <TouchableOpacity onPress={this.handlePress}>
@@ -48,33 +60,52 @@ export default class Fridge extends Component {
           <TouchableOpacity onPress={this.handlePress}>
             <Image style={styles.imagef1} source={require('./The_Fridge-icon.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.handlePress}>
+          <TouchableOpacity onPress={() => this.deleteMode()}>
             <Image style={styles.imagef1} source={require('./Compost-button.png')} />
           </TouchableOpacity>
-
-
         </View>
       </View>
     );
   }
-    handlePress = () => {
+  deleteMode(){
+    if (this.state.disabled){
+      this.state.color = "#cc0000";
+      this.state.header = "Select Item to Delete\nSelect Trashcan to leave"
+    }else{
+      this.state.color = "#ffffff";
+      this.state.header = "Items List";
+    }
+    this.state.disabled = !(this.state.disabled);
+    this.setState({ state: this.state });
+    this.forceUpdate();
+  }
+  deleteItem(){
+
+  }
+  handlePress = () => {
       Alert.alert("Hello!!!");
   }
 }
 const styles = StyleSheet.create({
   list:{
-
+    fontSize: 40,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  listL:{
+    flex: 1,
+    margin: 5,
+  },
+  listR:{
+    flex: 1,
+    flexDirection: 'row',
   },
   leftHold:{
-    width: 50,
+    width: 20,
   },
   rightHold:{
     flex: 1,
     width: 200,
-  },
-  fridgeB:{
-    backgroundColor: '#FF0000',
-    justifyContent: 'center',
   },
   imagef1:{
     height: 80,
@@ -82,12 +113,6 @@ const styles = StyleSheet.create({
     width: 100,
 
   },
-  imagef2:{
-    height: 80,
-    resizeMode: 'contain',
-    width: 150,
-  },
-
   container:{
     flex: 1,
     flexDirection: 'column',
@@ -97,8 +122,8 @@ const styles = StyleSheet.create({
   header:{
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'stretch',
-    justifyContent: 'space-around',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
     backgroundColor: '#3df2a7',
   },
   footer:{
@@ -108,14 +133,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     backgroundColor: '#3df2a7',
   },
-  buttonContainer: {
+  ListContainer: {
     flex:5,
-    margin: 20,
-    justifyContent: 'space-evenly',
-  },
-  alternativeLayoutButtonContainer: {
-    margin: 20,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
+    backgroundColor: '#ffffff',
   },
 });
