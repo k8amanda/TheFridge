@@ -44,7 +44,7 @@ app.get('/add', function (req, res, next) {
     });
 });
 
-/*Insert an entity into the fridge table*/
+/*Delete a hard-coded entity from the fridge table*/
 app.get('/delete', function (req, res, next) {
 	console.log("Deleted:");
     client.query('delete from fridge where name = $1', ['James Fridge'], function (err, result) {
@@ -76,6 +76,19 @@ app.post('/select_var', function (req, res, next) {
     });
 });
 
+/*Selecting a VARIABLE name from the fridge table*/
+app.post('/delete_var', function (req, res, next) {
+	console.log("Deleting:");
+	console.log(req.body);
+	console.log(req.body.name)
+	client.query('SELECT * FROM fridge where name = $1', [req.body.name], function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(400).send(err);
+        }
+    });
+});
+
 
 /*Selecting all values from the fridge table*/
 app.get('/select_all_fridges', function (req, res, next) {
@@ -96,6 +109,28 @@ app.get('/select_all_fridges', function (req, res, next) {
         console.log(query_result[3][0]);
     });
 });
+
+
+/*Selecting Food_names and expiration_dates from the fridge table*/
+app.get('/select_food_name_expdate', function (req, res, next) {
+	console.log("Selecting all fridges:");
+//	console.log(req.body.name); //NO PARAMETERS PASSED IN (until sorting)
+	client.query('SELECT * FROM Food_Items', function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(400).send(err);
+        }
+        var query_json_result = result.rows;
+
+        var query_result = [];
+        for (var i in query_json_result)
+        	query_result.push([query_json_result[i]['name'], query_json_result[i]['exp_date']]);
+
+        res.status(200).send(query_result);
+        console.log(query_result);
+    });
+});
+
 
 
 app.listen(4000, function () {
