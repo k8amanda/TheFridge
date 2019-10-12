@@ -3,7 +3,9 @@ import { Alert, Button, StyleSheet, View, Text, TextInput, Image, TouchableOpaci
 
 export default class ButtonBasics extends Component {
   _onPressButton() {
+    fetch("http://localhost:4000/");
     Alert.alert('You tapped the button!');
+    Alert.alert(res);
   }
 
   _onPressButton2() {
