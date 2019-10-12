@@ -6,16 +6,6 @@
  * @flow
  */
 
-/*import React, {Component} from 'react';
-import { StyleSheet, Text, View} from 'react-native';
-
-const style = StyleSheet.create({
-  lavendarBlue: {
-
-  }
-})*/
-/*Kate's Code*/
-
 import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, View, Image } from 'react-native';
 
