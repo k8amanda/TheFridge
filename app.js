@@ -9,6 +9,13 @@ client.connect();
 var app = express();
 app.set('port', process.env.PORT || 4000);
 
+// Parse URL-encoded bodies (as sent by HTML forms)
+//app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true})); 
+//app.use(express.json());   
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+
 /*Select kates fridge, pass back to ReactNative*/
 app.get('/', function (req, res, next) {
 	console.log("Selected:");
@@ -51,12 +58,13 @@ app.get('/delete', function (req, res, next) {
     });
 });
 
-/*Selecting a variable name from the fridge table*/
+/*Selecting a VARIABLE name from the fridge table*/
 app.post('/select_var', function (req, res, next) {
 	console.log("Selecting:");
-	console.log(req);
+	console.log(req.body);
+	console.log(req.body.name)
 //	console.log(req.body.name);
-	client.query('SELECT * FROM fridge where name = $1', ['Kates Fridge'], function (err, result) {
+	client.query('SELECT * FROM fridge where name = $1', [req.body.name], function (err, result) {
     //client.query('select * from fridge where name = $1', [req.body.name], function (err, result) {
         if (err) {
             console.log(err);
