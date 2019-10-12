@@ -385,7 +385,7 @@ const styles = StyleSheet.create({
   },
   foodList: {
     backgroundColor: '#D0F2E4',
-    flex: 1.25,
+    flex: 1,
     flexDirection: 'row',
   },
   buttonContainer: {
