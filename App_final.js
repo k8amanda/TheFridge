@@ -14,6 +14,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  }
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -28,7 +31,9 @@ class HomeScreen extends React.Component {
 }
 
 class FridgeScreen extends Component {
-
+  static navigationOptions = {
+    header: null
+  }
   constructor() {
     super();
     this.state = {
@@ -214,6 +219,9 @@ const styles = StyleSheet.create({
 });
 
 class AddScreen extends Component {
+  static navigationOptions = {
+    header: null
+  }
   constructor() {
     super();
     this.state = {
