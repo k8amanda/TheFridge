@@ -2,16 +2,26 @@ import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 /*Hard-coded selection*/
+//curl -H "Content-Type: application/json" -X POST -d '{"name":"James Fridge"}' http://130.64.96.226:4000/select_var
+
+
+/*VARIABLE selection*/
 export default class ButtonBasics extends Component {
   _onPressButton() {
-    let name_to_select = 'Kates Fridge';
-    fetch("http://130.64.96.226:4000*?param1=" + name_to_select)
-//      .then(response => Alert.alert("Responded"))
-//      .then(response => {
-//        Alert.alert(JSON.stringify(response))
-        //{"type":"default","status":200,"ok":true,"headers":{"map":{"date":"Sat, 12 Oct 2019 06:02:21 GMT","etag":"W/\"1e-iiHt3CoMUMkko5O3nG7R0pLS5gI\"","x-powered-by":"Express","connection":"keep-alive","content-length":"30","content-type":"application/json; charset=utf-8"}},"url":"http://130.64.96.226:4000/","_bodyInit":{"_data":{"size":30,"offset":0,"blobId":"da378e05-e6c0-4b95-aa04-f9e03ae88d6d","__collector":null}},"_bodyBlob":{"_data":{"size":30,"offset":0,"blobId":"da378e05-e6c0-4b95-aa04-f9e03ae88d6d","__collector":null}}}
-//        console.log("HEYYY" + JSON.stringify(response) + "\n")
-//      })
+    let name_to_select = 'James Fridge';
+    //fetch("http://130.64.96.226:4000/select_var"/*?param1=" + name_to_select*/)
+    var request = new Request("http://130.64.96.226:4000/select_var", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      //make sure to serialize your JSON body
+      body: JSON.stringify({
+        "name": name_to_select
+      })
+    })
+    fetch(request)
+   /* fetch("http://130.64.96.226:4000/select_var/", */
       .then((res) => {
         res.json() 
         .then((json) => {
@@ -30,13 +40,19 @@ export default class ButtonBasics extends Component {
 
 /*Hard-coded deletion*/
   _onPressButton2() {
-    fetch("http://130.64.96.226:4000/delete"/*?param1=value1&param2=value2"*/)
+    fetch("http://130.64.96.226:4000/"/*?param1=value1&param2=value2"*/)
 //      .then(response => Alert.alert("Responded"))
 //      .then(response => {
 //        Alert.alert(JSON.stringify(response))
         //{"type":"default","status":200,"ok":true,"headers":{"map":{"date":"Sat, 12 Oct 2019 06:02:21 GMT","etag":"W/\"1e-iiHt3CoMUMkko5O3nG7R0pLS5gI\"","x-powered-by":"Express","connection":"keep-alive","content-length":"30","content-type":"application/json; charset=utf-8"}},"url":"http://130.64.96.226:4000/","_bodyInit":{"_data":{"size":30,"offset":0,"blobId":"da378e05-e6c0-4b95-aa04-f9e03ae88d6d","__collector":null}},"_bodyBlob":{"_data":{"size":30,"offset":0,"blobId":"da378e05-e6c0-4b95-aa04-f9e03ae88d6d","__collector":null}}}
 //        console.log("HEYYY" + JSON.stringify(response) + "\n")
 //      })
+      .then((res) => {
+        res.json() 
+        .then((json) => {
+          Alert.alert(JSON.stringify(json))
+        })
+      })
       .catch(err => {
         Alert.alert("Error")
         console.log("ERROR")

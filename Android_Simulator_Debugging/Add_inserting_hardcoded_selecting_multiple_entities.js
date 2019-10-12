@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 /*Hard-coded selection*/
+//curl -H "Content-Type: application/json" -X POST -d '{"name":"James Fridge"}' http://130.64.96.226:4000/select_var
+
+
+/*Select all of the fridges*/
 export default class ButtonBasics extends Component {
   _onPressButton() {
-    let name_to_select = 'Kates Fridge';
-    fetch("http://130.64.96.226:4000*?param1=" + name_to_select)
-//      .then(response => Alert.alert("Responded"))
-//      .then(response => {
-//        Alert.alert(JSON.stringify(response))
-        //{"type":"default","status":200,"ok":true,"headers":{"map":{"date":"Sat, 12 Oct 2019 06:02:21 GMT","etag":"W/\"1e-iiHt3CoMUMkko5O3nG7R0pLS5gI\"","x-powered-by":"Express","connection":"keep-alive","content-length":"30","content-type":"application/json; charset=utf-8"}},"url":"http://130.64.96.226:4000/","_bodyInit":{"_data":{"size":30,"offset":0,"blobId":"da378e05-e6c0-4b95-aa04-f9e03ae88d6d","__collector":null}},"_bodyBlob":{"_data":{"size":30,"offset":0,"blobId":"da378e05-e6c0-4b95-aa04-f9e03ae88d6d","__collector":null}}}
-//        console.log("HEYYY" + JSON.stringify(response) + "\n")
-//      })
+    fetch("http://130.64.96.226:4000/select_all_fridges"/*?param1=" + name_to_select*/)
+    //var request = new Request("http://130.64.96.226:4000/select_all_fridges")
+    //fetch(request)
       .then((res) => {
         res.json() 
         .then((json) => {
@@ -28,22 +27,28 @@ export default class ButtonBasics extends Component {
     //Alert.alert('You tapped the button!');
   }
 
-/*Hard-coded deletion*/
+/*Add a single fridge named james (not using variables)*/
   _onPressButton2() {
-    fetch("http://130.64.96.226:4000/delete"/*?param1=value1&param2=value2"*/)
+    fetch("http://130.64.96.226:4000/add"/*?param1=value1&param2=value2"*/)
 //      .then(response => Alert.alert("Responded"))
 //      .then(response => {
 //        Alert.alert(JSON.stringify(response))
         //{"type":"default","status":200,"ok":true,"headers":{"map":{"date":"Sat, 12 Oct 2019 06:02:21 GMT","etag":"W/\"1e-iiHt3CoMUMkko5O3nG7R0pLS5gI\"","x-powered-by":"Express","connection":"keep-alive","content-length":"30","content-type":"application/json; charset=utf-8"}},"url":"http://130.64.96.226:4000/","_bodyInit":{"_data":{"size":30,"offset":0,"blobId":"da378e05-e6c0-4b95-aa04-f9e03ae88d6d","__collector":null}},"_bodyBlob":{"_data":{"size":30,"offset":0,"blobId":"da378e05-e6c0-4b95-aa04-f9e03ae88d6d","__collector":null}}}
 //        console.log("HEYYY" + JSON.stringify(response) + "\n")
 //      })
+/*      .then((res) => {
+        res.json() 
+        .then((json) => {
+          Alert.alert(JSON.stringify(json))
+        })
+      })*/
       .catch(err => {
         Alert.alert("Error")
         console.log("ERROR")
         console.log(err)
       });
 
-    Alert.alert('You tapped the button!');
+    Alert.alert('You added James Fridge!');
   }
 
   render() {

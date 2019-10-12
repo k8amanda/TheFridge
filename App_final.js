@@ -4,7 +4,11 @@ import { Alert, Button, StyleSheet, View, Text, TextInput, Image, TouchableOpaci
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
+<<<<<<< HEAD
 class HomePage extends Component {
+=======
+class HomeScreen extends React.Component {
+>>>>>>> 46be7ef6ee179ea52e16797c49ee5026fbabe31b
   static navigationOptions = {
     header: null
   }
@@ -335,4 +339,8 @@ const RootStack = createStackNavigator({
   Fridge: FridgeScreen,
 });
 
+<<<<<<< HEAD
 export default createAppContainer(RootStack);
+=======
+export default createAppContainer(RootStack);
+>>>>>>> 46be7ef6ee179ea52e16797c49ee5026fbabe31b
