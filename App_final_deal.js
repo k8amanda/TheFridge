@@ -322,14 +322,50 @@ class AddScreen extends Component {
   
   renderList = () => {
     let table = [];
+
+    let query_output;
+    let food_names = [];
+    let food_expdates = [];
+    fetch("http://130.64.96.226:4000/select_food_name_expdate")
+      .then((res) => {
+        res.json() 
+        .then((json) => {
+          query_output = json
+
+          for (var i in query_output) {
+            //Pretty Printing
+            this_output = query_output[i]
+            food_names.push(this_output[0]);
+            food_expdates.push(this_output[1].slice(5,10) + "-" + this_output[1].slice(0,4));
+          }
+
+          this.state.names = food_names;
+          this.state.dates = food_expdates;
+          this.setState({ state: this.state });
+        })
+      })
+     
+      .catch(err => {
+        Alert.alert("Error")
+        console.log("ERROR")
+        console.log(err)
+      });
+
     for (let i = 0; i < this.state.names.length; i++) {
-      table.push(
-        <View>
-          <Text>{this.state.names[i]}     {this.state.dates[i]}</Text>
-        </View>
-      )
-    }
-    return table;
+        table.push(
+          <View style={styles.ListContainer}>
+              <View style={styles.listL}>
+                <TouchableHighlight style={{backgroundColor: this.state.backcolor, borderRadius: 20, borderWidth: 2, borderColor: '#2c9b75'}} disabled={this.state.disabled} onPress={() => this.deleteItem(thisname)}>
+                  <Text style={{fontSize: 40,fontWeight: 'bold',textAlign: 'center',color: this.state.color}}>{this.state.names[i]}</Text>
+                </TouchableHighlight>
+              </View>
+              <View style={styles.listR}>
+                <Text style={styles.list}>{this.state.dates[i]}</Text>
+              </View>
+          </View>
+        );
+      }
+      return table;
   };
   
   /*_onPressButton() {
