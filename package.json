@@ -1,0 +1,15 @@
+{
+  "name": "thefridge_nodejs",
+  "version": "1.0.0",
+  "description": "NodeJS server for TheFridge",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrew Wang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^7.12.1"
+  }
+}
