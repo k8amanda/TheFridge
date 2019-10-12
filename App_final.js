@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
   },
   footer:{
     flex: 1,
+    padding: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
