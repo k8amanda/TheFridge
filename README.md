@@ -8,12 +8,7 @@
 - To run the NodeJS server, download NodeJS and NPM. 
     cd NodeJS_Server; node app.js
 
-Team Members:
-Andrew Cervantes
-Kate Hanson
-Andrew Wang
-Paul Roche
-James Cameron
+If you cannot download PostgreSQL, functional demo not connected to the database can be run with the file app_demo.js.
 
 Overview
 The Fridge is a system that allows you to keep track of all perishable foods in your fridge before they expire. No more moldy berries!
