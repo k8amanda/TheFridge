@@ -1,6 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const { Client } = require('pg');
-const connectionString = 'postgres://postgres:postgres@localhost:5432/TheFridge';
+const connectionString = process.env.POSTGRES_CONNECTION_STRING//'postgres://postgres:postgres@localhost:5432/TheFridge';
 const client = new Client({
     connectionString: connectionString
 });
