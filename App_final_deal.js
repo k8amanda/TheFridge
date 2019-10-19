@@ -3,6 +3,7 @@ import { Flatlist, ActivityIndicator, Alert, Button, StyleSheet, View, Text, Tex
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+//import 'WindowOrWorkerGlobalScope.fetch()';
 
 //Home Page leads to the Fridge Page
 class HomePage extends Component {
@@ -95,7 +96,7 @@ class FridgeScreen extends Component {
     return (
       <View style={styles.total}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+          <TouchableOpacity disabled={this.state.disabled} onPress={() => this.props.navigation.navigate('Home')}>
             <Image style={styles.images}  source={require('./Fridge-condensed-white.png')} />
           </TouchableOpacity>
            <View style={styles.leftHoldF} />
