@@ -1,7 +1,7 @@
-require('dotenv').config();
+//require('dotenv').config();
 const express = require('express');
 const { Client } = require('pg');
-const connectionString = process.env.POSTGRES_CONNECTION_STRING//'postgres://postgres:postgres@localhost:5432/TheFridge';
+const connectionString = process.env.DATABASE_URL//POSTGRES_CONNECTION_STRING//'postgres://postgres:postgres@localhost:5432/TheFridge';
 const client = new Client({
     connectionString: connectionString
 });
@@ -182,6 +182,7 @@ app.get('/select_food_name_expdate', function (req, res, next) {
 
 app.listen(4000, function () {
     console.log('Server is running.. on Port 4000');
+    console.log(process.env.DATABASE_URL);
 });
 
 
