@@ -247,7 +247,7 @@ class AddScreen extends Component {
       //make sure to serialize your JSON body
       body: JSON.stringify({
         "name": this.state.food, 
-        "exp_date": this.state.expdate
+        "exp_date": this.state.date
       })
     })
     fetch(del_req)
