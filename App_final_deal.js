@@ -63,8 +63,8 @@ class FridgeScreen extends Component {
             food_expdates.push(this_output[1].slice(5,10) + "-" + this_output[1].slice(0,4));
           }
 
-          this.setState({names: food_names});
-          this.setState({dates: food_expdates});
+          this.state.names = food_names;
+          this.state.dates = food_expdates;
           this.setState({ state: this.state });
         })
       })
@@ -125,16 +125,16 @@ class FridgeScreen extends Component {
   }
   deleteMode(){
     if (this.state.disabled){
-      this.setState({ backcolor: "#ea7794"});
-      this.setState({header: "Select Item to Delete\nSelect Trashcan to leave"});
-      this.setState({color: "#ffffff"});
+      this.state.backcolor = "#ea7794";
+      this.state.header = "Select Item to Delete\nSelect Trashcan to leave";
+      this.state.color = "#ffffff";
     }else{
-      this.setState({backcolor: "#ffffff"});
-      this.setState({header: "Items List"});
-      this.setState({color: "#000000"});
+      this.state.backcolor = "#ffffff";
+      this.state.header = "Items List";
+      this.state.color = "#000000";
 
     }
-    this.setState({disabled: !(this.state.disabled)});
+    this.state.disabled = !(this.state.disabled);
     this.setState({ state: this.state });
     this.forceUpdate();
   }
@@ -204,8 +204,8 @@ class AddScreen extends Component {
             food_expdates.push(this_output[1].slice(5,10) + "-" + this_output[1].slice(0,4));
           }
 
-          this.setState({names: food_names});
-          this.setState({dates: food_expdates});
+          this.state.names = food_names;
+          this.state.dates = food_expdates;
           this.setState({ state: this.state });
         })
       })
@@ -297,7 +297,6 @@ class AddScreen extends Component {
     );
   }
 }
-
 //Stylesheet for the pages
 const styles = StyleSheet.create({
   upHold:{
@@ -392,9 +391,7 @@ const styles = StyleSheet.create({
     flex:5,
     justifyContent: 'center',
   },
-
 });
-
 //Navigation Hub
 const RootStack = createStackNavigator({
   Home: HomePage,
