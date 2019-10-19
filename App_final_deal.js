@@ -3,8 +3,7 @@ import { Flatlist, ActivityIndicator, Alert, Button, StyleSheet, View, Text, Tex
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-//import 'WindowOrWorkerGlobalScope.fetch()';
-
+import DatePicker from 'react-native-datepicker';
 //Home Page leads to the Fridge Page
 class HomePage extends Component {
   static navigationOptions = {
@@ -32,7 +31,11 @@ class FridgeScreen extends Component {
   static navigationOptions = {
     header: null
   }
+
   constructor() {
+    var day = new Date().getDate();
+    var month = new Date().getMonth();
+    var year = new Date().getFullYear();
     super();
     this.state = {
       size: 0,
@@ -42,6 +45,8 @@ class FridgeScreen extends Component {
       backcolor: "#ffffff",
       header: "Items List",
       color: "#000000",
+      mindate: day + '-' + month + '-' + year,
+      date: day + '-' + month + '-' + year,
    };
   }
   renderList = () =>{
@@ -96,7 +101,7 @@ class FridgeScreen extends Component {
     return (
       <View style={styles.total}>
         <View style={styles.header}>
-          <TouchableOpacity disabled={!this.state.disabled} onPress={() => this.props.navigation.navigate('Home')}>
+          <TouchableOpacity disabled={this.state.disabled} onPress={() => this.props.navigation.navigate('Home')}>
             <Image style={styles.images}  source={require('./Fridge-condensed-white.png')} />
           </TouchableOpacity>
            <View style={styles.leftHoldF} />
@@ -174,6 +179,7 @@ class AddScreen extends Component {
   static navigationOptions = {
     header: null
   }
+
   constructor() {
     super();
     this.state = {
@@ -231,7 +237,6 @@ class AddScreen extends Component {
       }
       return table;
   };
-  
   updateFridge = () => {
     var del_req = new Request("http://130.64.96.226:4000/add_var", {
 
@@ -242,7 +247,7 @@ class AddScreen extends Component {
       //make sure to serialize your JSON body
       body: JSON.stringify({
         "name": this.state.food, 
-        "exp_date": this.state.expdate
+        "exp_date": this.state.date
       })
     })
     fetch(del_req)
@@ -274,7 +279,19 @@ class AddScreen extends Component {
             <Text>Food Item</Text>
             <TextInput style={styles.formInput} placeholder="i.e. milk, bread, etc." onChangeText={(text) => this.setState({food:text})} />
             <Text>Exp. Date</Text>
-            <TextInput style={styles.formInput} placeholder="MM-DD-YYYY" onChangeText={(text) => this.setState({expdate:text})} />
+            <DatePicker
+              mode='date'
+              placeholder='select date'
+              date={this.state.date}
+              minDate= {new Date()}
+              maxDate="01-01-2020"
+              format="MM-DD-YYYY"
+              confirmBtnText='confirm'
+              cancelBtnText='cancel'
+              customStyles={{dateInput:{borderWidth: 0}}}
+              onDateChange={(date)=>{this.setState({date:date})}}
+              style={styles.formInput}
+            /> 
             <Button onPress={this.updateFridge} title="Add to Fridge" color="#ea7794" />
           </View>
 
