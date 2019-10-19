@@ -96,7 +96,7 @@ class FridgeScreen extends Component {
     return (
       <View style={styles.total}>
         <View style={styles.header}>
-          <TouchableOpacity disabled={this.state.disabled} onPress={() => this.props.navigation.navigate('Home')}>
+          <TouchableOpacity disabled={!this.state.disabled} onPress={() => this.props.navigation.navigate('Home')}>
             <Image style={styles.images}  source={require('./Fridge-condensed-white.png')} />
           </TouchableOpacity>
            <View style={styles.leftHoldF} />
