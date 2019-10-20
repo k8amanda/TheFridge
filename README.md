@@ -1,4 +1,5 @@
 # TheFridge
+KATE IS A KOOL KUKUMBER 
 ***NOTES***
 -The file App_final_deal.js is the file to use to run the code.
 -To run postgres server: Download PostgreSQL. To instantiate the database tables:
