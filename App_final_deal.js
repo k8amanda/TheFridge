@@ -15,7 +15,7 @@ class HomePage extends Component {
              
         <View style={styles.buttonContainer}>
           <TouchableOpacity disabled= {true}>
-              <Image style={{width: 300, height: 80, resizeMode: 'contain'}} source={require('./graphics/Fridge-extended-white.png')} />
+              <Image style={{width: 300, height: 80, resizeMode: 'contain'}} source={require('./Fridge-extended-white.png')} />
           </TouchableOpacity>
           <Text style={styles.upHold}></Text>
             <Button onPress={() => this.props.navigation.navigate('Fridge')} title="OPEN YOUR FRIDGE" color="#ea7794" />       
@@ -102,10 +102,10 @@ class FridgeScreen extends Component {
       <View style={styles.total}>
         <View style={styles.header}>
           <TouchableOpacity disabled={this.state.disabled} onPress={() => this.props.navigation.navigate('Home')}>
-            <Image style={styles.images}  source={require('./graphics/Fridge-condensed-white.png')} />
+            <Image style={styles.images}  source={require('./Fridge-condensed-white.png')} />
           </TouchableOpacity>
            <View style={styles.leftHoldF} />
-          <Image style={{width: 200, resizeMode: 'contain'}} source={require('./graphics/Fridge-extended-white.png')} />
+          <Image style={{width: 200, resizeMode: 'contain'}} source={require('./Fridge-extended-white.png')} />
           <View style={styles.rightHoldf} />
         </View>
 
@@ -118,11 +118,11 @@ class FridgeScreen extends Component {
         <View style={styles.footer}>
           <TouchableOpacity disabled={!this.state.disabled} onPress={() => this.props.navigation.navigate('Add')}>
 
-            <Image style={styles.images} source={require('./graphics/Add-button.png')} />
+            <Image style={styles.images} source={require('./Add-button.png')} />
           </TouchableOpacity>
-          <Image style={styles.images} source={require('./graphics/The_Fridge-icon.png')} />
+          <Image style={styles.images} source={require('./The_Fridge-icon.png')} />
           <TouchableOpacity onPress={() => this.deleteMode()}>
-            <Image style={styles.images} source={require('./graphics/Compost-button.png')} />
+            <Image style={styles.images} source={require('./Compost-button.png')} />
           </TouchableOpacity>
         </View>
       </View>
@@ -267,10 +267,10 @@ class AddScreen extends Component {
       <View style={styles.total}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-            <Image style={styles.images}  source={require('./graphics/Fridge-condensed-white.png')} />
+            <Image style={styles.images}  source={require('./Fridge-condensed-white.png')} />
           </TouchableOpacity>
            <View style={styles.leftHoldF} />
-          <Image style={{width: 115, resizeMode: 'contain'}} source={require('./graphics/Add-title.png')} />
+          <Image style={{width: 115, resizeMode: 'contain'}} source={require('./Add-title.png')} />
           <View style={styles.rightHoldf} />
         </View>
         
@@ -304,11 +304,11 @@ class AddScreen extends Component {
         </View>
               
         <View style={styles.footer}>
-          <Image style={styles.images} onPress={this._onPressButton} source={require('./graphics/Add-button.png')} />
+          <Image style={styles.images} onPress={this._onPressButton} source={require('./Add-button.png')} />
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Fridge')}>
-            <Image style={styles.images} source={require('./graphics/The_Fridge-icon.png')} />
+            <Image style={styles.images} source={require('./The_Fridge-icon.png')} />
           </TouchableOpacity>
-          <Image style={styles.images} source={require('./graphics/Compost-button.png')} />
+          <Image style={styles.images} source={require('./Compost-button.png')} />
         </View>
       </View>
     );
