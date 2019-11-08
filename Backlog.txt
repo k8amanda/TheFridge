@@ -1,0 +1,8 @@
+Backlog:
+  Setting up Heroku server
+  Push Notifications
+  Create new account page
+  Sending username/password to the database
+  Hashing/Encryption
+  Firebase API integration
+  Heruko limitations workaround
