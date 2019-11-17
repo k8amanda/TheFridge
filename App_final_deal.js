@@ -3,11 +3,19 @@ import { Flatlist, ActivityIndicator, Alert, Button, StyleSheet, View, Text, Tex
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+
 import DatePicker from 'react-native-datepicker';
 //Home Page leads to the Fridge Page
 class HomePage extends Component {
   static navigationOptions = {
     header: null
+  }
+  constructor() {
+
+    super();
+    this.state = {
+      password: '',
+   };
   }
   render() {
     return (
@@ -17,7 +25,12 @@ class HomePage extends Component {
           <TouchableOpacity disabled= {true}>
               <Image style={{width: 300, height: 80, resizeMode: 'contain'}} source={require('./Fridge-extended-white.png')} />
           </TouchableOpacity>
-          <Text style={styles.upHold}></Text>
+          <View style={styles.userform}>
+            <Text style={{textAlign:'center', fontSize: 18}}>Username</Text>
+            <TextInput style={styles.formInput} placeholder="Enter username" onChangeText={(text) => this.setState({food:text})} />
+            <Text style={{textAlign:'center', fontSize: 18}}>Password</Text>
+            <TextInput  secureTextEntry={true} style={styles.formInput} value={this.state.password} onChangeText={ (password) => this.setState({password}) } placeholder="Enter password"/>          
+          </View>
             <Button onPress={() => this.props.navigation.navigate('Fridge')} title="OPEN YOUR FRIDGE" color="#ea7794" />       
         </View>       
       </View>
@@ -101,7 +114,7 @@ class FridgeScreen extends Component {
     return (
       <View style={styles.total}>
         <View style={styles.header}>
-          <TouchableOpacity disabled={!this.state.disabled} onPress={() => this.props.navigation.navigate('Home')}>
+          <TouchableOpacity disabled={this.state.disabled} onPress={() => this.props.navigation.navigate('Home')}>
             <Image style={styles.images}  source={require('./Fridge-condensed-white.png')} />
           </TouchableOpacity>
            <View style={styles.leftHoldF} />
@@ -316,9 +329,6 @@ class AddScreen extends Component {
 }
 //Stylesheet for the pages
 const styles = StyleSheet.create({
-  upHold:{
-    height: 80,
-  },
   list:{
     fontSize: 20,
     fontWeight: 'bold',
@@ -382,8 +392,15 @@ const styles = StyleSheet.create({
   formInput: {
     borderWidth: 1,
     borderRadius: 20,
+    backgroundColor: "white",
     margin: 10,
     padding: 5,
+  },
+  passInput: {
+    borderRadius: 20,
+    borderWidth: 1,
+    backgroundColor: "white",
+ 
   },
   buttonContainerTemp: {
     flex:5,
@@ -397,6 +414,9 @@ const styles = StyleSheet.create({
   },
   form: {
     flex: 1,
+    margin: 20,
+  },
+  userform: {
     margin: 20,
   },
   foodList: {
