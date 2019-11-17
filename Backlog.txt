@@ -1,6 +1,7 @@
 Backlog:
   Setting up Heroku server
-  Push Notifications
+  Push Notifications -DONE
+  Implementing Push into the project
   Create new account page
   Sending username/password to the database
   Hashing/Encryption
